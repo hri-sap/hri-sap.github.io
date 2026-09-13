@@ -1,0 +1,50 @@
+<svg class="sculpture" viewBox="0 0 640 660" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="body" x1="183" y1="170" x2="457" y2="473" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#222230" />
+      <stop offset=".2" stop-color="#727080" />
+      <stop offset=".38" stop-color="#dbd5ed" />
+      <stop offset=".47" stop-color="#8b7cab" />
+      <stop offset=".64" stop-color="#373044" />
+      <stop offset=".82" stop-color="#18171f" />
+      <stop offset="1" stop-color="#43404b" />
+    </linearGradient>
+    <linearGradient id="edge" x1="300" y1="86" x2="332" y2="522" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eee5dc" />
+      <stop offset=".3" stop-color="#c0adc9" />
+      <stop offset=".58" stop-color="#716081" />
+      <stop offset="1" stop-color="#16161e" />
+    </linearGradient>
+    <linearGradient id="inner" x1="235" y1="179" x2="396" y2="478" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18171e" />
+      <stop offset=".46" stop-color="#24202f" />
+      <stop offset=".75" stop-color="#7d718e" />
+      <stop offset=".9" stop-color="#d9c7b6" />
+      <stop offset="1" stop-color="#514759" />
+    </linearGradient>
+    <radialGradient id="pool">
+      <stop stop-color="#b29dce" stop-opacity=".19" />
+      <stop offset="1" stop-color="#a294c0" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="atmosphere">
+      <stop stop-color="#9681c7" stop-opacity=".09" />
+      <stop offset="1" stop-color="#9681c7" stop-opacity="0" />
+    </radialGradient>
+    <filter id="soft-light"><feGaussianBlur stdDeviation="8" /></filter>
+  </defs>
+  <ellipse cx="338" cy="327" rx="277" ry="296" fill="url(#atmosphere)" />
+  <ellipse cx="338" cy="569" rx="210" ry="30" fill="url(#pool)" />
+  <path d="M164 569h346" stroke="#9d90b2" stroke-opacity=".1" />
+  <g transform="rotate(32 320 311)">
+    <ellipse cx="320" cy="306" rx="125" ry="214" stroke="url(#body)" stroke-width="77" />
+    <ellipse cx="320" cy="306" rx="160" ry="249" stroke="url(#edge)" stroke-width="1.2" />
+    <ellipse cx="320" cy="306" rx="87" ry="176" stroke="url(#inner)" stroke-width="4" />
+    {Array.from({ length: 20 }, (_, i) => (
+      <ellipse cx="320" cy="306" rx={91 + i * 3.4} ry={180 + i * 3.4} stroke="url(#edge)" stroke-opacity={0.06 + (i % 3) * 0.015} stroke-width=".6" />
+    ))}
+    <path d="M213 148c24-46 62-77 107-77 77 0 139 83 157 191" stroke="#e6d5d5" stroke-opacity=".14" stroke-width="9" filter="url(#soft-light)" />
+  </g>
+  <path d="M486 146h31m-15-15v30" stroke="#b9adca" stroke-opacity=".35" stroke-width="1" />
+  <circle cx="132" cy="444" r="3" stroke="#c6ae8d" stroke-opacity=".65" />
+  <path d="M132 455v29h29" stroke="#c6ae8d" stroke-opacity=".2" />
+</svg>

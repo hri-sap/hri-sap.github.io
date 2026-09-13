@@ -1,0 +1,99 @@
+---
+import type { Project } from '../data/site';
+interface Props {
+  kind: Project['id'];
+}
+const { kind } = Astro.props;
+---
+<div class:list={['project-visual', `visual-${kind}`]} aria-hidden="true">
+  {kind === 'advisor' && (
+    <svg viewBox="0 0 620 370" fill="none">
+      <defs>
+        <radialGradient id="network-light">
+          <stop stop-color="#9e8ac5" stop-opacity=".12" />
+          <stop offset="1" stop-color="#9e8ac5" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="network-line" x1="80" y1="140" x2="510" y2="220" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#605477" stop-opacity=".3" />
+          <stop offset=".5" stop-color="#b8a6d5" />
+          <stop offset="1" stop-color="#806c99" stop-opacity=".35" />
+        </linearGradient>
+      </defs>
+      <ellipse cx="320" cy="181" rx="275" ry="173" fill="url(#network-light)" />
+      <path d="M-20 292 646 80M-20 208 646-4M-20 376 646 164M88 0l207 370M280 0l207 370M-104 0l207 370M472 0l207 370" stroke="#9389a5" stroke-opacity=".06" />
+      <path d="M103 228h85q30 0 30-30v-28q0-30 30-30h44m45 38v53q0 27 27 27h74m-101-90h112q25 0 25-25v-41m-151 74v-58q0-24-24-24h-89" stroke="url(#network-line)" stroke-width="1.5" />
+      <path d="M339 177h110q25 0 25-25v-43" stroke="#c4b092" stroke-width="2" stroke-dasharray="4 6" stroke-opacity=".6" />
+      <g transform="translate(271 121)">
+        <rect x="5" y="9" width="104" height="88" rx="20" fill="#0f1016" stroke="#35303f" />
+        <rect width="104" height="88" rx="20" fill="#292332" stroke="#80728f" />
+        <path d="m26 39 26-13 26 13-26 13-26-13Zm9 6v16c12 8 22 8 34 0V45m9-6v22" stroke="#dbcee8" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+      <g fill="#1b1a23" stroke="#4b425b">
+        <rect x="59" y="207" width="95" height="43" rx="10" />
+        <rect x="139" y="65" width="103" height="43" rx="10" />
+        <rect x="421" y="69" width="103" height="43" rx="10" />
+        <rect x="414" y="236" width="113" height="43" rx="10" />
+      </g>
+      <g font-family="ui-monospace, monospace" font-size="10" letter-spacing="1.5" text-anchor="middle">
+        <text x="107" y="233" fill="#bfb3cd">EXPLORE</text>
+        <text x="191" y="91" fill="#bfb3cd">QUESTION</text>
+        <text x="473" y="95" fill="#d2bea1">NEXT STEP</text>
+        <text x="470" y="262" fill="#bfb3cd">CONNECT</text>
+      </g>
+      <circle cx="218" cy="177" r="3" fill="#b2a0c8" />
+      <circle cx="388" cy="177" r="3" fill="#d0b68f" />
+      <text x="30" y="337" fill="#918699" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">A QUESTION CAN OPEN A PATH</text>
+    </svg>
+  )}
+  {kind === 'scheduling' && (
+    <svg viewBox="0 0 540 310" fill="none">
+      <path d="M101 58v185m78-185v185m78-185v185m78-185v185m78-185v185m78-185v185" stroke="#a1937e" stroke-opacity=".1" stroke-dasharray="3 6" />
+      <g font-family="ui-monospace, monospace" font-size="10" fill="#a59e92" letter-spacing="1">
+        <text x="36" y="110">FCFS</text><text x="36" y="165">SJF</text><text x="36" y="220">RR</text>
+        <text x="98" y="264">0</text><text x="250" y="264">4</text><text x="407" y="264">8</text>
+      </g>
+      <g stroke-width="1">
+        <rect x="101" y="87" width="150" height="34" rx="5" fill="#756044" fill-opacity=".45" stroke="#ad8e61" stroke-opacity=".55" />
+        <rect x="258" y="87" width="72" height="34" rx="5" fill="#514736" fill-opacity=".5" stroke="#8a7557" stroke-opacity=".4" />
+        <rect x="337" y="87" width="111" height="34" rx="5" fill="#332f29" stroke="#5b5142" />
+        <rect x="101" y="142" width="72" height="34" rx="5" fill="#514736" fill-opacity=".5" stroke="#8a7557" stroke-opacity=".4" />
+        <rect x="180" y="142" width="111" height="34" rx="5" fill="#332f29" stroke="#5b5142" />
+        <rect x="298" y="142" width="150" height="34" rx="5" fill="#756044" fill-opacity=".45" stroke="#ad8e61" stroke-opacity=".55" />
+        {Array.from({ length: 9 }, (_, i) => <rect x={101 + i * 39} y="197" width="32" height="34" rx="4" fill={['#756044', '#514736', '#332f29'][i % 3]} fill-opacity=".5" stroke="#8a7557" stroke-opacity=".4" />)}
+      </g>
+      <path d="M296 53v190" stroke="#d1b481" stroke-opacity=".7" />
+      <path d="m292 49 4 5 4-5" fill="#d1b481" />
+      <circle cx="462" cy="42" r="3" fill="#d1b481" fill-opacity=".7" />
+      <text x="102" y="43" fill="#a59e92" font-family="ui-monospace, monospace" font-size="9" letter-spacing="2">A MATTER OF TIME</text>
+    </svg>
+  )}
+  {kind === 'notes' && (
+    <svg viewBox="0 0 540 310" fill="none">
+      <g transform="rotate(-7 273 159)">
+        <rect x="153" y="50" width="257" height="217" rx="9" fill="#1b1b25" stroke="#393544" />
+      </g>
+      <g transform="rotate(5 273 159)">
+        <rect x="137" y="42" width="257" height="222" rx="9" fill="#22212c" stroke="#595060" />
+        <path d="M137 83h257" stroke="#49404f" />
+        <circle cx="155" cy="63" r="3" fill="#af9bbc" />
+        <path d="M168 63h58" stroke="#9c8fa9" stroke-width="2" stroke-linecap="round" />
+        <path d="M163 114h142" stroke="#c6bdd0" stroke-width="5" stroke-linecap="round" />
+        <path d="M163 141h199m-199 13h181m-181 13h189" stroke="#70677e" stroke-width="2" stroke-linecap="round" />
+        <rect x="160" y="192" width="13" height="13" rx="3" fill="#837094" fill-opacity=".25" stroke="#9985aa" />
+        <path d="m164 198 3 3 5-6" stroke="#c7b1db" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M186 198h123" stroke="#80718d" stroke-width="2" stroke-linecap="round" />
+        <rect x="160" y="219" width="13" height="13" rx="3" stroke="#6e617b" />
+        <path d="M186 225h94" stroke="#655b72" stroke-width="2" stroke-linecap="round" />
+        <path d="M352 42v32l10-7 10 7V42" fill="#a18baf" />
+      </g>
+      <path d="M421 208v29m-14-14h28" stroke="#9f8fb0" stroke-opacity=".4" />
+    </svg>
+  )}
+  {kind === 'memory' && (
+    <svg viewBox="0 0 300 132" fill="none">
+      {Array.from({ length: 24 }, (_, i) => (
+        <rect x={20 + (i % 8) * 33} y={20 + Math.floor(i / 8) * 32} width="25" height="24" rx="4" fill={[0, 1, 2, 6, 8, 9, 10, 14, 15, 18, 22].includes(i) ? '#494154' : '#1c1d25'} stroke={[0, 1, 2, 6, 8, 9, 10, 14, 15, 18, 22].includes(i) ? '#786788' : '#383540'} />
+      ))}
+    </svg>
+  )}
+</div>

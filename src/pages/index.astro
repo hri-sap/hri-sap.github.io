@@ -1,0 +1,203 @@
+---
+import Arrow from '../components/Arrow.astro';
+import Sculpture from '../components/Sculpture.astro';
+import ProjectVisual from '../components/ProjectVisual.astro';
+import { notes, projects, site } from '../data/site';
+import '../styles/global.css';
+
+const canonical = new URL('/', Astro.site);
+const socialImage = new URL('/social-card.png', Astro.site);
+const year = new Date().getUTCFullYear();
+const formatDate = (date: string) =>
+  new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(
+    new Date(`${date}T00:00:00Z`),
+  );
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111116" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content={site.description} />
+    <meta name="author" content={site.name} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={site.title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hrishav Sapkota. Building with intent. Exploring with curiosity." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={site.title} />
+    <meta name="twitter:description" content={site.description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{site.title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header wrap" id="top">
+      <a class="identity" href="#top" aria-label={`${site.name}, back to top`}>
+        <span class="monogram" aria-hidden="true">{site.initials}<span>.</span></span>
+        <span class="identity-name">{site.name}</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#notes">Notes</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="header-github text-link" href={site.github}>GitHub <Arrow /></a>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="hero wrap" aria-labelledby="hero-heading">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="small-dot"></span>{site.hero.eyebrow}</p>
+          <h1 id="hero-heading">
+            {site.hero.lines.map((line, index) => (
+              <span class:list={{ 'serif hero-emphasis': index === 2 }}>{line}</span>
+            ))}
+          </h1>
+          <p class="hero-introduction">{site.hero.introduction}</p>
+          <div class="hero-actions">
+            <a class="button" href="#work">Explore my work <Arrow direction="down" /></a>
+            <a class="text-link secondary-link" href="#about">A little about me <Arrow direction="right" /></a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <Sculpture />
+          <p class="art-caption"><span>FIG. 01</span> A study in possibility</p>
+        </div>
+        <div class="hero-bottom">
+          <p>A quieter corner of the internet.</p>
+          <a href="#work" class="scroll-cue">Scroll to explore <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="work-section section wrap" id="work" aria-labelledby="work-heading">
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="eyebrow section-label"><span>01 /</span> Selected work</p>
+            <h2 id="work-heading">{site.work.title}</h2>
+          </div>
+          <p class="section-introduction">{site.work.introduction}</p>
+        </div>
+        <div class="projects">
+          {projects.map((project) => (
+            <article class:list={['project', `project-${project.id}`]} data-reveal>
+              <div class="project-art">
+                <ProjectVisual kind={project.id} />
+                <p class="visual-caption"><span>{project.visualLabel}</span><span>Concept study / {project.number}</span></p>
+              </div>
+              <div class="project-copy">
+                <p class="eyebrow project-category">{project.category}</p>
+                <h3><a href={project.url}>{project.name}<Arrow /></a></h3>
+                <p class="project-description">{project.description}</p>
+                <ul class="tags" aria-label={`${project.name} technologies`}>
+                  {project.technologies.map((technology) => <li>{technology}</li>)}
+                </ul>
+                <a class="text-link project-source" href={project.url} aria-label={`View ${project.name} source on GitHub`}>View project <Arrow /></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="work-bottom">
+          <p>A selection, not the whole story.</p>
+          <a href={site.repositories} class="text-link">All repositories on GitHub <Arrow /></a>
+        </div>
+      </section>
+
+      <section class="notes-section section wrap" id="notes" aria-labelledby="notes-heading">
+        <div class="notes-heading" data-reveal>
+          <p class="eyebrow section-label"><span>02 /</span> Notes & perspectives</p>
+          <h2 id="notes-heading">{site.writing.title}</h2>
+          <p class="section-introduction">{site.writing.introduction}</p>
+          <span class="notes-flourish" aria-hidden="true">↳</span>
+        </div>
+        <div class="notes-content" data-reveal>
+          {notes.length === 0 ? (
+            <div class="empty-notes">
+              <div class="notebook-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+              <p class="serif empty-title">{site.writing.emptyTitle}</p>
+              <p class="empty-description">{site.writing.emptyDescription}</p>
+              <p class="eyebrow empty-status"><span class="small-dot"></span>A blank page, for now</p>
+            </div>
+          ) : (
+            <div class="note-list">
+              {notes.map((note) => (
+                <details class="note" id={`note-${note.slug}`}>
+                  <summary>
+                    <span class="note-meta eyebrow"><time datetime={note.date}>{formatDate(note.date)}</time> / {note.category}</span>
+                    <span class="note-title">{note.title}<span class="note-toggle" aria-hidden="true">+</span></span>
+                    <span class="note-summary">{note.summary}</span>
+                  </summary>
+                  <div class="note-body">{note.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+                </details>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section class="about-section section wrap" id="about" aria-labelledby="about-heading">
+        <div data-reveal>
+          <p class="eyebrow section-label"><span>03 /</span> Beyond the code</p>
+          <h2 id="about-heading">{site.about.titleLine}<br />{site.about.titleLead} <span class="serif">{site.about.titleEmphasis}</span></h2>
+          <div class="about-signature" aria-hidden="true">hs<span>.</span></div>
+        </div>
+        <div class="about-copy" data-reveal>
+          {site.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          <p class="about-aside"><span class="small-dot"></span>{site.about.aside}</p>
+        </div>
+      </section>
+
+      <section class="contact-section wrap" aria-labelledby="contact-heading">
+        <div class="contact-inner" data-reveal>
+          <p class="eyebrow">The next connection</p>
+          <h2 id="contact-heading">{site.contact.titleLead} <span class="serif">{site.contact.titleEmphasis}</span></h2>
+          <p>{site.contact.description}</p>
+          <a class="button button-light" href={site.github}>Find me on GitHub <Arrow /></a>
+        </div>
+        <div class="closing-line" aria-hidden="true"><span></span><span class="closing-spark">✳</span><span></span></div>
+      </section>
+    </main>
+
+    <footer class="site-footer wrap">
+      <p>© {year} {site.name}</p>
+      <p class="footer-note">Made with intention. Kept simple.</p>
+      <a href="#top" class="text-link">Back to top <Arrow direction="up" /></a>
+    </footer>
+    <script>
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.animate(
+                  [{ transform: 'translateY(18px)' }, { transform: 'translateY(0)' }],
+                  { duration: 650, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)' },
+                );
+                observer.unobserve(entry.target);
+              }
+            }
+          },
+          { threshold: 0.08 },
+        );
+        document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
+        reducedMotion.addEventListener('change', (event) => {
+          if (event.matches) {
+            observer.disconnect();
+            document.getAnimations().forEach((animation) => animation.cancel());
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
